@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+source .env
+
+docker run -d \
+  --name spotify \
+  --restart=always \
+  --user "$(id -u)" \
+  -v "/run/user/1000/pulse/native:/var/run/pulseaudio.sock" \
+  jasonben/spotifyd:latest \
+  --device-name "$SPOTIFY_DEVICE" \
+  --username "$SPOTIFY_USERNAME" \
+  --password "$SPOTIFY_PASSWORD"
